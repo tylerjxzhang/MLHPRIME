@@ -1,0 +1,106 @@
+.hero-unit {
+  height: 100vh;
+  background-color: #eee;
+  background-position: 50% 100%;
+  background-size: cover;
+}
+
+.hero-logo {
+  width: 80%;
+  max-width: 500px;
+  height: auto;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+.hero-content {
+  width: 100%;
+  margin: auto;
+  margin-top: 25vh;
+  text-align: center;
+}
+
+.direct-signup {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.three-steps {
+  min-height: 80vh;
+  height: auto;
+  background-color: #eee;
+  text-align: center;
+  padding: 30px;
+}
+
+img.responsive {
+  max-width: 100%;
+  height: auto;
+}
+
+.three-steps md-whiteframe {
+  background: #fff;
+  padding: 15px 10px !important;
+  margin: 17px;
+  height: auto;
+}
+
+.features {
+  min-height: 80vh;
+  height: auto;
+  background-color: white;
+  text-align: center;
+  padding: 30px;
+}
+
+.features .star {
+  width: 90%;
+}
+
+.features .feature-list {
+  text-align: left;
+}
+
+.features .feature-tile {
+  padding: 10px;
+}
+
+.features h3 {
+  margin: 0 !important;
+}
+
+.features md-whiteframe {
+  background: #fff;
+  padding: 15px 10px !important;
+  margin: 17px;
+  height: auto;
+}
+
+.reviews {
+  min-height: 30vh;
+  height: auto;
+  background-color: #eee;
+  text-align: center;
+  padding: 30px;
+  text-align: left;
+}
+
+.reviews md-card {
+  margin: 14px;
+}
+
+.reviews md-whiteframe {
+  background: #fff;
+  margin: 17px;
+  height: auto;
+}
+
+.form md-input-container.input {
+  margin-bottom: 0px;
+}
+
+#social-fab {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+}

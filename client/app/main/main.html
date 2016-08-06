@@ -1,0 +1,52 @@
+<div class="body-content" layout="column">
+	<header class="hero-unit" id="banner" layout="row">
+		<div class="hero-content" layout="column" layout-align="center center">
+			<h4 class="md-headline" layout="row">Firefly provide integrated social media feedback on local POI</h4>
+			<div class="direct-signup hero-text" ng-hide="ma.isLoggedIn()" layout="row">
+				<md-input-container style="margin-top:-2%" class="button">
+					<md-button class="md-raised md-primary" ng-href="/signup">Join now</md-button>
+				</md-input-container>
+			</div>
+		</div>
+	</header>
+	<div id="social-fab">
+	<md-fab-speed-dial md-direction="left" md-open="ma.isOpen"
+	     class="md-scale md-fab-bottom-right" ng-class="{ 'md-hover-full': ma.hover }"
+	     ng-mouseenter="ma.isOpen=true" ng-mouseleave="ma.isOpen=false">
+	<md-fab-trigger>
+	  <md-button aria-label="menu" class="md-fab md-primary">
+	  	<md-tooltip md-direction="top">
+        	Contact us
+        </md-tooltip>
+	    <md-icon md-svg-src="assets/images/icons/help.svg"></md-icon>
+	  </md-button>
+	</md-fab-trigger>
+	<md-fab-actions>
+	  <md-button href="tel:519-731-1310" aria-label="Phone" class="md-fab md-raised md-mini">
+	  	<md-tooltip md-direction="top">
+        	Phone: +1 519-731-1310
+        </md-tooltip>
+	    <md-icon md-svg-src="assets/images/icons/phone.svg" aria-label="Phone"></md-icon>
+	  </md-button>
+	  <md-button href="mailto:orbitwaterloo@gmail.com?Subject=Hello" target="_top" aria-label="Email" class="md-fab md-raised md-mini">
+	  	<md-tooltip md-direction="top">
+        	Email: OrbitWaterloo@gmail.com
+        </md-tooltip>
+	    <md-icon md-svg-src="assets/images/icons/mail.svg" aria-label="Email"></md-icon>
+	  </md-button>
+	  <md-button aria-label="Facebook" class="md-fab md-raised md-mini">
+	  	<md-tooltip md-direction="top">
+        	Facebook
+        </md-tooltip>
+	    <md-icon md-svg-src="assets/images/icons/facebook.svg" aria-label="Facebook"></md-icon>
+	  </md-button>
+	  <md-button aria-label="Twitter" class="md-fab md-raised md-mini">
+	  	<md-tooltip md-direction="top">
+        	Twitter
+        </md-tooltip>
+	    <md-icon md-svg-src="assets/images/icons/twitter.svg" aria-label="Twitter"></md-icon>
+	  </md-button>
+	</md-fab-actions>
+	</md-fab-speed-dial>
+</div>
+
