@@ -15,8 +15,8 @@
 		<a ng-href="#/app/{{category}}/{{radius}}"><button class="search2-submit">Discover</button></a>
 	</div>
 	<div class="block map">
-		<ui-gmap-google-map center="map.center" zoom="map.zoom">
-			<ui-gmap-markers models="markers" coords="'self'" modelsbyref="false"/>
+		<ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options">
+			<ui-gmap-markers models="markers" coords="'self'" modelsbyref="false"/ >
 		</ui-gmap-google-map>
 	</div>
 	</div>
