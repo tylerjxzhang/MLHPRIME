@@ -41,7 +41,7 @@
       options: {
         styles: styles
       },
-      zoom: 12
+      zoom: 13
     };
 
     $scope.markers = [];
@@ -53,7 +53,7 @@
               latitude: data.lat,
               longitude: data.lon
             },
-            radius: 200,
+            radius: data.rad,
             stroke: {
                 color: '#000',
                 weight: 2,
@@ -80,9 +80,17 @@
             info = {
               'name': d.name,
               'lat': d.geometry.location.lat,
-              'lon': d.geometry.location.lng
+              'lon': d.geometry.location.lng,
+              'rad': 100 + d.score * 200
             };
             addMarker(info);
+            $scope.loading = false;
+            $scope.$apply(function(){
+              $scope.map.center = {
+                latitude: pos.coords.latitude+0.00001,
+                longitude: pos.coords.longitude
+              };
+            });
           });
           console.log($scope.markers);
           console.log(response);
@@ -93,10 +101,7 @@
     navigator.geolocation.getCurrentPosition(
       function(pos) {
         $scope.$apply(function(){
-          $scope.map.center = {
-            latitude: pos.coords.latitude,
-            longitude: pos.coords.longitude
-          };
+          $scope.map.center = $scope.map.center;
         });
         console.log(JSON.stringify($scope.map));
         displayMarker();
