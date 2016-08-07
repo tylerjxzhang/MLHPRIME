@@ -1,8 +1,8 @@
 (function(){
-	var app = angular.module('firefly',['ui.router', 'ngRoute']);
+	var app = angular.module('firefly',['ui.router', 'ngRoute', 'ngMap']);
 
 	app.config(function ($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider) {
-	  $routeProvider
+    $routeProvider
       .when("/", {
         templateUrl: "landing.html",
         controller: "IndexCtrl"
@@ -11,15 +11,14 @@
         templateUrl: "main.html",
         controller: "MainCtrl"
       });
-
-	  $locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true);
 	});
 
-//////////////////////////////////////////////////////////////////////////////////////
-  app.controller('IndexCtrl', function($rootScope, $scope, $routeParams, $http){  
+  app.controller('IndexCtrl', function($rootScope, $scope, $routeParams, $http){
     console.log("index controller loaded");
   });
-	app.controller('MainCtrl', function($rootScope, $scope, $routeParams, $http){  
+
+  app.controller('MainCtrl', function($rootScope, $scope, $routeParams, $http){
     console.log("main controller loaded");
   });
-})()
+})();

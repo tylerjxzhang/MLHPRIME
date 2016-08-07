@@ -51,7 +51,10 @@ span {
 	padding:0;
 }
 #map {
-	height:500px;
+	height:100vh;
+}
+ng-map {
+	height: 95vh;
 }
 button {
 	font-weight:bold;
