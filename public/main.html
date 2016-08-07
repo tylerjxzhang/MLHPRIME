@@ -1,9 +1,10 @@
 <div id="main">
+
 	<div class="loading-container" ng-show="loading">
 	    <div class="loading"></div>
 	    <div id="loading-text">loading</div>
 	</div>
-	<div id="search2">
+	<div id="search2" ng-show="!loading">
 		<input class="search2" ng-model="category" ng-init="radius=''"></input>
 		<form>
 		<select ng-model="radius" ng-init="radius=5">
