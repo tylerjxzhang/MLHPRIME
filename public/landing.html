@@ -6,7 +6,19 @@
 		<img src="/font.png" class="firefly-font">
 		<div id="search">
 
-			<input class="search"></input><button class="search-submit">Discover</button>
+			<input class="search" ng-model="category"></input>
+			<form>
+			<select>
+				<option value="1">1km</option>
+				<option value="2">2km</option>
+				<option value="3">3km</option>
+				<option value="4">4km</option>
+				<option value="5">5km</option>
+				<option value="10">10km</option>
+				<option value="20">20km</option>
+			</select>
+			</form>
+			<a href="/app"><button class="search-submit" ng-href="/app/{{category}}/{{radius}}">Discover</button></a>
 		</div>
 	</div>
 	

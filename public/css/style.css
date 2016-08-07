@@ -27,7 +27,7 @@ span {
 .frontpage {
 	max-width:820px;
 	margin:auto;
-	margin-top:100px;
+	margin-top:250px;
 }
 .firefly-font {
 	margin:auto;
@@ -37,6 +37,12 @@ span {
 	display:flex;
 	flex-direction:row;
 	margin-top:40px;
+}
+#search select {
+	padding:12px;
+	margin-left:16px;
+	border:0;
+	border-radius:0 16px;
 }
 #search * {
 	font-size:16px;

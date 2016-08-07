@@ -7,7 +7,7 @@
         templateUrl: "landing.html",
         controller: "IndexCtrl"
       })
-      .when("/app", {
+      .when("/app/:category/:radius", {
         templateUrl: "main.html",
         controller: "MainCtrl"
       });
@@ -20,5 +20,6 @@
 
   app.controller('MainCtrl', function($rootScope, $scope, $routeParams, $http){
     console.log("main controller loaded");
+    console.log($routeParams);
   });
 })();
