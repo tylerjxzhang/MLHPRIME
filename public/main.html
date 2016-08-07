@@ -1,4 +1,8 @@
 <div id="main">
+	<div class="loading-container">
+	    <div class="loading"></div>
+	    <div id="loading-text">loading</div>
+	</div>
 	<div id="search2">
 		<input class="search2" ng-model="category" ng-init="radius=''"></input>
 		<form>
@@ -16,7 +20,7 @@
 	</div>
 	<div class="block map">
 		<ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options">
-			<ui-gmap-markers models="markers" coords="'self'" modelsbyref="false"/ >
+<ui-gmap-circle ng-repeat="c in circles track by c.id" center="c.center" stroke="c.stroke" fill="c.fill" radius="c.radius"></ui-gmap-circle>
 		</ui-gmap-google-map>
 	</div>
 	</div>
