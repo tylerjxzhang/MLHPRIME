@@ -55,7 +55,7 @@
       options: {
         styles: styles
       },
-      zoom: 15
+      zoom: 12
     };
 
     $scope.markers = [];
