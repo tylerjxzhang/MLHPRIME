@@ -30,8 +30,10 @@ span {
 	margin-top:250px;
 }
 .firefly-font {
+	padding:16px;
 	margin:auto;
-	max-width:100%;
+	background:rgba(46,46,46,0.85);
+	max-width:calc(100% - 32px);
 }
 #search {
 	display:flex;
@@ -41,8 +43,14 @@ span {
 #search select {
 	padding:12px;
 	margin-left:16px;
-	border:0;
+	border:2px solid #fff;
+	background:rgba(246,246,246,0.6);
+	color:#000;
 	border-radius:0 16px;
+}
+#search select option {
+	color:#000;
+	border:0;
 }
 #search * {
 	font-size:16px;
@@ -55,7 +63,7 @@ span {
 	background:rgba(39,39,39,0.8);
 	border-radius:0px 16px;
 	color:#fff;
-	border:1px solid #fff;
+	border:2px solid #fff;
 	transition: all 0.2s ease-in-out;
 }
 .search:hover {
@@ -63,12 +71,12 @@ span {
 }
 .search-submit {
 	border:0;
-	background:rgba(246,246,246,0.7);
+	background:rgba(246,246,246,0.6);
 	margin-left:16px;
 	border-radius:0px 16px;
 	color:#000;
 	padding:12px 20px;
-	border:1px solid #fff;
+	border:2px solid #fff;
 	transition: all 0.2s ease-in-out;
 }
 .search-submit:hover {
@@ -164,4 +172,42 @@ button.danger {
 button.danger:hover {
 	cursor:pointer;
 	background:#737373;
+}
+.content {
+	margin-top:250px;
+	width:100%;
+	background:rgba(60,60,60,1);
+}
+.content h2 {
+	color:#eee;
+	letter-spacing:0.5px;
+	padding:20px 0;
+	margin:0;
+}
+.content .panel {
+	padding:20px;
+	padding-bottom:48px;
+	background:#eee;
+	color:#000;
+	line-height:150%;
+}
+.panel .white-bg {
+	background:#fff;
+}
+.width {
+	width:1020px;
+	margin:auto;
+}
+footer {
+	width:100%;
+	background:#000;
+	padding:16px 0;
+	color:#ccc;
+	font-weight:bold;
+}
+footer a {
+	color:#ccc;
+}
+footer a:hover {
+	color:#fff;
 }

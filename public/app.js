@@ -21,14 +21,41 @@
   app.controller('MainCtrl', function($rootScope, $scope, $routeParams, $http, uiGmapGoogleMapApi){
     console.log("main controller loaded");
     console.log($routeParams);
+    var styles = [ { "featureType": "landscape", "stylers": [ { "hue": "#ffe500" }, { "saturation": -100 }, { "lightness": -45 } ] },
+    { "featureType": "poi", "stylers": [ { "hue": "#0008ff" }, { "saturation": -87 }, { "lightness": -51 } ] },
+    { "featureType": "road", "elementType": "labels.icon", "stylers": [ { "hue": "#1100ff" }, { "saturation": -65 }, 
+    { "gamma": 1.05 }, { "visibility": "off" }, { "lightness": -25 } ] },{ "featureType": "road.highway", "stylers": [ { "lightness": 21 }, { "saturation": -48 }, { "hue": "#ffff00" } ] },
+    { "featureType": "water", "stylers": [ { "saturation": -42 }, { "hue": "#0091ff" }, { "lightness": -73 } ] },{ "featureType": "poi" } ];
     $scope.keyword = $routeParams.category;
     $scope.radius = $routeParams.radius;
+    $scope.circles = [
+        {
+            id: 1,
+            center: {
+                latitude: 44,
+                longitude: -108
+            },
+            radius: 500000,
+            stroke: {
+                color: '#08B21F',
+                weight: 2,
+                opacity: 1
+            },
+            fill: {
+                color: '#08B21F',
+                opacity: 0.5
+            }
+        }
+    ];
     $scope.map = {
       center: {
         latitude: 45,
         longitude: -73
       },
-      zoom: 12
+      options: {
+        styles: styles
+      },
+      zoom: 15
     };
 
     $scope.markers = [];
