@@ -48,9 +48,10 @@ router.get('/', function(req, res) {
 									}, 0);
 									var average = sum / response.length;
 									// console.log(average);
+									list[j2]['tweets'] = batchInput;
 									list[j2]['score'] = average;
 								}).then(function(){
-									console.log("before" + list[j2]['score']);
+									//console.log("before" + list[j2]['score']);
 									deferred.resolve();
 								}).error(function(err){
 									// console.log(err);
@@ -65,7 +66,7 @@ router.get('/', function(req, res) {
 					}
 				})(j);
 			}
-			console.log('PROMISES: ', deferreds.length);
+			//console.log('PROMISES: ', deferreds.length);
 			jQuery.when.apply(jQuery, deferreds).done(function() {
 				newlist = list.map(function(el) {
 					return (!el.score) ? Math.random() : el.score;

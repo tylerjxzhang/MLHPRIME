@@ -15,12 +15,12 @@
 	});
 
   app.controller('IndexCtrl', function($rootScope, $scope, $routeParams, $http){
-    console.log("index controller loaded");
+    //console.log("index controller loaded");
   });
 
   app.controller('MainCtrl', function($rootScope, $scope, $routeParams, $http, uiGmapGoogleMapApi){
-    console.log("main controller loaded");
-    console.log($routeParams);
+    //console.log("main controller loaded");
+    //console.log($routeParams);
     var marker_id = 0;
 
     var styles = [ { "featureType": "landscape", "stylers": [ { "hue": "#ffe500" }, { "saturation": -100 }, { "lightness": -45 } ] },
@@ -35,8 +35,8 @@
 
     $scope.map = {
       center: {
-        latitude: 40.364902,
-        longitude: -74.1674117
+        latitude: 43.70011,
+        longitude: -79.41630
       },
       options: {
         styles: styles
@@ -81,40 +81,41 @@
               'name': d.name,
               'lat': d.geometry.location.lat,
               'lon': d.geometry.location.lng,
-              'rad': 100 + d.score * 200
+              'rad': 50 + d.score * 400,
+              'fill': {
+                'color': '#FFFF66',
+                'opacity': d.score
+              }
             };
             addMarker(info);
             $scope.loading = false;
-            $scope.$apply(function(){
-              $scope.map.center = {
-                latitude: pos.coords.latitude+0.00001,
-                longitude: pos.coords.longitude
-              };
-            });
+            console.log(response);
           });
-          console.log($scope.markers);
-          console.log(response);
-      }, function errorCallback(response) {
-        console.log(response);
+          //console.log($scope.markers);
+      }, function errorCallback(err) {
+        console.log(err);
       });
     };
     navigator.geolocation.getCurrentPosition(
       function(pos) {
         $scope.$apply(function(){
-          $scope.map.center = $scope.map.center;
+          $scope.map.center = {
+            latitude: pos.coords.latitude,
+            longitude: pos.coords.longitude
+          };
         });
-        console.log(JSON.stringify($scope.map));
+        console.log(pos);
         displayMarker();
       },
       function(error) {
         alert('Unable to get location: ' + error.message);
         $scope.$apply(function(){
           $scope.map.center = {
-            latitude: 40.364902,
-            longitude: -74.1674117
+            latitude: 43.70011,
+            longitude: -79.41630
           };
         });
-        console.log(JSON.stringify($scope.map));
+        //console.log(JSON.stringify($scope.map));
         displayMarker();
       },
       options
