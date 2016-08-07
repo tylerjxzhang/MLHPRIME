@@ -57,14 +57,36 @@
       },
       zoom: 15
     };
+
+    $scope.markers = [];
+    addMarker = function (data) {
+      $scope.markers.push(
+        {
+            id: data.name,
+            latitude: data.lat,
+            longitude: data.lon
+        }
+      );
+    };
+
     var options = {
       enableHighAccuracy: false
     };
+
     displayMarker = function() {
       $http({
         method: 'GET',
         url: '/api?lat=' + $scope.map.center.latitude + '\&lon=' + $scope.map.center.longitude + '\&radius=' + $scope.radius + '\&keyword='+ $scope.keyword
       }).then(function successCallback(response) {
+          response.data.forEach(function(d){
+            info = {
+              'name': d.name,
+              'lat': d.geometry.location.lat,
+              'lon': d.geometry.location.lng
+            };
+            addMarker(info);
+          });
+          console.log($scope.markers);
           console.log(response);
       }, function errorCallback(response) {
         console.log(response);

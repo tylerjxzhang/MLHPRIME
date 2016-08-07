@@ -1,13 +1,23 @@
 <div id="main">
-	<div class="loading-overlay">
-	<div class="loading-container">
-	    <div class="loading"></div>
-	    <div id="loading-text">loading</div>
+	<div id="search2">
+		<input class="search2" ng-model="category" ng-init="radius=''"></input>
+		<form>
+		<select ng-model="radius" ng-init="radius=5">
+			<option value="1">1km</option>
+			<option value="2">2km</option>
+			<option value="3">3km</option>
+			<option value="4">4km</option>
+			<option value="5" ng-selected="radius == 5" >5km</option>
+			<option value="10">10km</option>
+			<option value="20">20km</option>
+		</select>
+		</form>
+		<a ng-href="#/app/{{category}}/{{radius}}"><button class="search2-submit">Discover</button></a>
 	</div>
 	<div class="block map">
-		<ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options">
-		 <ui-gmap-circle ng-repeat="c in circles track by c.id" stroke="c.stroke" fill="c.fill" radius="c.radius"
-                visible="c.visible" clickable="c.clickable"></ui-gmap-circle></ui-gmap-google-map>
+		<ui-gmap-google-map center="map.center" zoom="map.zoom">
+			<ui-gmap-markers models="markers" coords="'self'" modelsbyref="false"/>
+		</ui-gmap-google-map>
 	</div>
 	</div>
 </div>

@@ -4,7 +4,11 @@
   "description": "firefly",
   "dependencies": {
     "express": "~4.0.0",
-    "request": "^2.74.0"
+    "indico.io": "^0.10.0",
+    "jquery": "^3.1.0",
+    "jquery-deferred": "^0.3.0",
+    "request": "^2.74.0",
+    "twitter": "^1.4.0"
   },
   "devDependencies": {}
 }
