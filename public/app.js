@@ -21,6 +21,8 @@
   app.controller('MainCtrl', function($rootScope, $scope, $routeParams, $http, uiGmapGoogleMapApi){
     console.log("main controller loaded");
     console.log($routeParams);
+    $scope.keyword = $routeParams.category;
+    $scope.radius = $routeParams.radius;
     $scope.map = {
       center: {
         latitude: 45,
@@ -28,9 +30,18 @@
       },
       zoom: 15
     };
-
     var options = {
       enableHighAccuracy: false
+    };
+    displayMarker = function() {
+      $http({
+        method: 'GET',
+        url: '/api?lat=' + $scope.map.center.latitude + '\&lon=' + $scope.map.center.longitude + '\&radius=' + $scope.radius + '\&keyword='+ $scope.keyword
+      }).then(function successCallback(response) {
+          console.log(response);
+      }, function errorCallback(response) {
+        console.log(response);
+      });
     };
     navigator.geolocation.getCurrentPosition(
       function(pos) {
@@ -41,6 +52,7 @@
           };
         });
         console.log(JSON.stringify($scope.map));
+        displayMarker();
       },
       function(error) {
         alert('Unable to get location: ' + error.message);
