@@ -292,7 +292,8 @@ footer a:hover {
         }
 
 
-        .loading-container { margin: 40px auto }
+        .loading-container { margin: 40px auto;
+        	margin-top:120px;}
 
         .loading {
             border: 2px solid transparent;
@@ -308,7 +309,7 @@ footer a:hover {
         }
 
         .loading-container:hover .loading {
-            border-color: transparent #E45635 transparent #E45635;
+            border-color: transparent #FFFF66 transparent #FFFF66;
         }
         .loading-container:hover .loading,
         .loading-container .loading {

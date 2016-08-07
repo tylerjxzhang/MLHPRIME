@@ -22,14 +22,17 @@
     console.log("main controller loaded");
     console.log($routeParams);
     var marker_id = 0;
+
     var styles = [ { "featureType": "landscape", "stylers": [ { "hue": "#ffe500" }, { "saturation": -100 }, { "lightness": -45 } ] },
     { "featureType": "poi", "stylers": [ { "hue": "#0008ff" }, { "saturation": -87 }, { "lightness": -51 } ] },
     { "featureType": "road", "elementType": "labels.icon", "stylers": [ { "hue": "#1100ff" }, { "saturation": -65 }, 
     { "gamma": 1.05 }, { "visibility": "off" }, { "lightness": -25 } ] },{ "featureType": "road.highway", "stylers": [ { "lightness": 21 }, { "saturation": -48 }, { "hue": "#ffff00" } ] },
     { "featureType": "water", "stylers": [ { "saturation": -42 }, { "hue": "#0091ff" }, { "lightness": -73 } ] },{ "featureType": "poi" } ];
     $scope.keyword = $routeParams.category;
+    $scope.loading = true;
     $scope.radius = $routeParams.radius;
     $scope.circles = [];
+
     $scope.map = {
       center: {
         latitude: 40.364902,
