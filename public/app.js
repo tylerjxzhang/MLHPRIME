@@ -28,6 +28,25 @@
     { "featureType": "water", "stylers": [ { "saturation": -42 }, { "hue": "#0091ff" }, { "lightness": -73 } ] },{ "featureType": "poi" } ];
     $scope.keyword = $routeParams.category;
     $scope.radius = $routeParams.radius;
+    $scope.circles = [
+        {
+            id: 1,
+            center: {
+                latitude: 44,
+                longitude: -108
+            },
+            radius: 500000,
+            stroke: {
+                color: '#08B21F',
+                weight: 2,
+                opacity: 1
+            },
+            fill: {
+                color: '#08B21F',
+                opacity: 0.5
+            }
+        }
+    ];
     $scope.map = {
       center: {
         latitude: 45,
