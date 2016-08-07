@@ -34,26 +34,31 @@ router.get('/', function(req, res) {
 						var deferred = jQuery.Deferred();
 						deferreds.push(deferred);
 						t.get('search/tweets', {q: "\""+list[j2].name+"\"", count: 5, location: location.lat+","+location.lon+","+radius+"km", result_type: "recent"}, function(err, tweets, response) {
-							var batchInput = [];
-							for (var i = 0; i < tweets.statuses.length; i++) {
-								batchInput.push(tweets.statuses[i].text);
-							}
-							console.log(list[j2].name);
-							console.log(batchInput);
-							indico.sentimentHQ(batchInput)
-							.then(function(response) {
-								console.log(response);
-								var sum = response.reduce(function(a, b) {
-									return a + b;
-								}, 0);
-								var average = sum / response.length;
-								console.log(average);
-								list[j2]['score'] = average;
-								deferred.resolve();
-							}).error(function(err){
+							if (!err && tweets.statuses.length !== 0) {
+								var batchInput = [];
+								for (var i = 0; i < tweets.statuses.length; i++) {
+									batchInput.push(tweets.statuses[i].text);
+								}
+								console.log(list[j2].name);
+								console.log(batchInput);
+								indico.sentimentHQ(batchInput)
+								.then(function(response) {
+									console.log(response);
+									var sum = response.reduce(function(a, b) {
+										return a + b;
+									}, 0);
+									var average = sum / response.length;
+									console.log(average);
+									list[j2]['score'] = average;
+									deferred.resolve();
+								}).error(function(err){
+									console.log(err);
+									deferred.resolve();
+								});
+							} else {
 								console.log(err);
-								deferred.reject();
-							});
+								deferred.resolve();
+							}
 						});
 					}
 				})(j);
