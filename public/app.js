@@ -21,6 +21,7 @@
   app.controller('MainCtrl', function($rootScope, $scope, $routeParams, $http, uiGmapGoogleMapApi){
     console.log("main controller loaded");
     console.log($routeParams);
+    var marker_id = 0;
     var styles = [ { "featureType": "landscape", "stylers": [ { "hue": "#ffe500" }, { "saturation": -100 }, { "lightness": -45 } ] },
     { "featureType": "poi", "stylers": [ { "hue": "#0008ff" }, { "saturation": -87 }, { "lightness": -51 } ] },
     { "featureType": "road", "elementType": "labels.icon", "stylers": [ { "hue": "#1100ff" }, { "saturation": -65 }, 
@@ -44,19 +45,19 @@
     addMarker = function (data) {
       $scope.circles.push(
         {
-            id: data.name,
+            id: ++marker_id,
             center: {
               latitude: data.lat,
               longitude: data.lon
             },
-            radius: 50000,
+            radius: 200,
             stroke: {
-                color: '#08B21F',
+                color: '#000',
                 weight: 2,
                 opacity: 1
             },
             fill: {
-                color: '#08B21F',
+                color: '#FFFF66',
                 opacity: 0.5
             }
         }
