@@ -19,19 +19,18 @@
 		<a ng-href="/app/{{category}}/{{radius}}/"><button class="search2-submit">Discover</button></a>
 	</div>
 	<div class="block map">
-	<div class="sidebar sidebar-left" style="display:none;background-color:#eee;opacity:0.6;position:fixed;left:0;height:100%;width:27%;z-index:1">
+	<div class="sidebar sidebar-left" style="background-color:#eee;opacity:0.6;position:fixed;left:0;height:100%;width:27%;z-index:1">
 			<div class="scrollable">
 				<h1 class="scrollable-header app-name">My App</h1>  
 				<div class="scrollable-content">
 					<div class="list-group" ui-turn-off='uiSidebarLeft'>
-						<a class="list-group-item" href="#/link1">Link 1 
-							<i class="fa fa-chevron-right pull-right"></i></a>
-							<a class="list-group-item" href="#/link2">Link 2
-								<i class="fa fa-chevron-right pull-right"></i></a>
-							</div>
-						</div>
+						<!-- <div ng-repeat="tweet in poi.name">
+							<h3>{{tweet}}</h3>
+						</div> -->
 					</div>
 				</div>
+			</div>
+		</div>
 		<ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options">
 			<ui-gmap-circle ng-repeat="c in circles track by c.id" center="c.center" stroke="c.stroke" fill="c.fill" radius="c.radius" style="position:relative;z-index:-1"></ui-gmap-circle>
 		</ui-gmap-google-map>
