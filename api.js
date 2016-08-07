@@ -50,6 +50,8 @@ router.get('/', function(req, res) {
 									var average = sum / response.length;
 									console.log(average);
 									list[j2]['score'] = average;
+								}).then(function(){
+									console.log("before" + list[j2]['score']);
 									deferred.resolve();
 								}).error(function(err){
 									console.log(err);

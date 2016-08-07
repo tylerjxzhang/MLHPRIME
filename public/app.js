@@ -31,8 +31,8 @@
     $scope.circles = [];
     $scope.map = {
       center: {
-        latitude: 45,
-        longitude: -73
+        latitude: 40.364902,
+        longitude: -74.1674117
       },
       options: {
         styles: styles
@@ -99,6 +99,14 @@
       },
       function(error) {
         alert('Unable to get location: ' + error.message);
+        $scope.$apply(function(){
+          $scope.map.center = {
+            latitude: 40.364902,
+            longitude: -74.1674117
+          };
+        });
+        console.log(JSON.stringify($scope.map));
+        displayMarker();
       },
       options
     );
