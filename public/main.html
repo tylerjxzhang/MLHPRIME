@@ -1,7 +1,13 @@
 <div id="main">
+	<div class="loading-overlay">
+	<div class="loading-container">
+	    <div class="loading"></div>
+	    <div id="loading-text">loading</div>
+	</div>
 	<div class="block map">
 		<ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options">
 		 <ui-gmap-circle ng-repeat="c in circles track by c.id" stroke="c.stroke" fill="c.fill" radius="c.radius"
                 visible="c.visible" clickable="c.clickable"></ui-gmap-circle></ui-gmap-google-map>
+	</div>
 	</div>
 </div>
