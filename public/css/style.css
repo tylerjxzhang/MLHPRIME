@@ -86,26 +86,15 @@ span {
 	margin:auto;
 
 }
-#main .sidebar {
-	min-width:300px;
-	background:#333;
-}
-#main .row .block {
-	margin:10px;
-	padding:12px 20px;
-	flex-grow:1;
-	background:#fff;
-	font-weight: bold;
-	line-height:150%;
-}
 #main .row .block.map {
 	padding:0;
+	margin:0;
 }
-#map {
+ui-gmap-google-map {
 	height:100vh;
 }
-ng-map {
-	height: 95vh;
+.angular-google-map-container {
+	height: 100vh;
 }
 button {
 	font-weight:bold;
