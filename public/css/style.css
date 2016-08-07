@@ -4,6 +4,7 @@ body {
 	margin:0px auto;
 	font-weight: normal; 
 	font-family: Geneva, Tahoma, Verdana, sans-serif;
+	overflow-y:hidden;
 }
 h1, h2 {
 	color:#222;
@@ -293,7 +294,7 @@ footer a:hover {
 
 
         .loading-container { margin: 40px auto;
-        	margin-top:40vh;}
+        	margin-top:40vh; min-height:100vh;}
 
         .loading {
             border: 2px solid transparent;

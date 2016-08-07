@@ -19,7 +19,7 @@
 		</form>
 		<a ng-href="#/app/{{category}}/{{radius}}"><button class="search2-submit">Discover</button></a>
 	</div>
-	<div class="block map" ng-show="!loading">
+	<div class="block map">
 		<ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options">
 <ui-gmap-circle ng-repeat="c in circles track by c.id" center="c.center" stroke="c.stroke" fill="c.fill" radius="c.radius"></ui-gmap-circle>
 		</ui-gmap-google-map>
