@@ -1,0 +1,25 @@
+{
+  "name": "firefly",
+  "description": "firefly",
+  "main": "/public/index.html",
+  "authors": [
+    "tylerzhangtextnow <tyler.zhang@enflick.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/tylerjxzhang/MLHPRIME",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "client/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ngmap": "^1.17.3",
+    "angular": "^1.5.8",
+    "angular-route": "^1.5.8",
+    "angular-ui-router": "^0.3.1",
+    "jquery": "^3.1.0"
+  }
+}

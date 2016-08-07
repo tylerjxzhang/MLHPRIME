@@ -3,7 +3,7 @@ node_modules
 .idea
 .DS_Store
 .dist
-client/bower_components
+public/components
 /server/config/local.env.js
 npm-debug.log
 coverage
