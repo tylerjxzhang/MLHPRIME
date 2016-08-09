@@ -89,8 +89,6 @@
             };
             addMarker(info);
             $scope.loading = false;
-            $scope.poi = d;
-            console.log("DA POI IS HEAR,:", $scope.poi)
             console.log(response);
           });
           //console.log($scope.markers);
