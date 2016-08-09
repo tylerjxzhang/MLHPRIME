@@ -8,13 +8,13 @@ var jQuery = require('jquery-deferred');
 
 
 var t = new Twitter({
-	consumer_key: "3geFIdem5d4MWmZ62DH4IhbhQ",
-	consumer_secret: "Yw9ukzXOKEZXdx4m5466YnppbmtskbpM0ZZtufZyW46UMwLkXB",
-	access_token_key: "381340321-SN2w6Kl0e3JnzB7p3FBw8IzUXgCPpxdogiYF5DkV",
-	access_token_secret: "IjdoRGN4n2mDvCnpkEh2Kus0CgcGFMCG9ciHGT2hSsjXd"
+	consumer_key: "placeholder",
+	consumer_secret: "placeholder",
+	access_token_key: "placeholder",
+	access_token_secret: "placeholdre"
 });
 
-indico.apiKey =  'c7c2cda9dc5b823f03b3a86da7dc0e18';
+indico.apiKey =  'placeholder';
 
 router.get('/', function(req, res) {
 	var location = {
@@ -23,7 +23,7 @@ router.get('/', function(req, res) {
 	};
 	var radius = req.query['radius'] * 1000;
 	var keyword = req.query['keyword'];
-	var apiKey = 'AIzaSyBPfNkKjw3kTzhMP7A2GSgDHc1vqpV_Bmw';
+	var apiKey = 'placeholder';
 	request('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + location.lat + ',' + location.lon + '\&radius=' + radius + '\&keyword=' + keyword + '\&key=' + apiKey, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
 			var list = JSON.parse(body).results;
