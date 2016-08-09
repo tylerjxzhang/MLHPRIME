@@ -11,12 +11,12 @@ var t = new Twitter({
 	consumer_key: "placeholder",
 	consumer_secret: "placeholder",
 	access_token_key: "placeholder",
-	access_token_secret: "placeholdre"
+	access_token_secret: "placeholder"
 });
 
 indico.apiKey =  'placeholder';
 var googleMap = {
-	'apiKey' : 'AIzaSyAD--KR8TukHG0Ux-o94MCFZHmOTXQhzj4'
+	'apiKey' : 'placeholder'
 };
 
 router.get('/', function(req, res) {
