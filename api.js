@@ -5,18 +5,17 @@ var request = require('request');
 var indico = require('indico.io');
 var Twitter = require("twitter");
 var jQuery = require('jquery-deferred');
+var secrets = require('./secrets');
 
-var t = new Twitter({
-	consumer_key: "3geFIdem5d4MWmZ62DH4IhbhQ",
-	consumer_secret: "Yw9ukzXOKEZXdx4m5466YnppbmtskbpM0ZZtufZyW46UMwLkXB",
-	access_token_key: "381340321-SN2w6Kl0e3JnzB7p3FBw8IzUXgCPpxdogiYF5DkV",
-	access_token_secret: "IjdoRGN4n2mDvCnpkEh2Kus0CgcGFMCG9ciHGT2hSsjXd"
+var twit = new Twitter({
+	consumer_key: secrets.twitterConsumerKey,
+	consumer_secret: secrets.twitterConsumerSecret,
+	access_token_key: secrets.twitterAccessTokenKey,
+	access_token_secret: secrets.twitterAccessTokenSecret
 });
 
-indico.apiKey =  'c7c2cda9dc5b823f03b3a86da7dc0e18';
-var googleMap = {
-	'apiKey' : 'AIzaSyAD--KR8TukHG0Ux-o94MCFZHmOTXQhzj4'
-};
+indico.apiKey =  secrets.indicoKey;
+var googleMapKey = secrets.googleMapKey;
 
 router.get('/', function(req, res) {
 	// Get params
@@ -27,7 +26,7 @@ router.get('/', function(req, res) {
 	var radius = req.query['radius'] * 1000;
 	var keyword = req.query['keyword'];
 
-	var url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + location.lat + ',' + location.lon + '\&radius=' + radius + '\&keyword=' + keyword + '\&key=' + googleMap.apiKey;
+	var url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + location.lat + ',' + location.lon + '\&radius=' + radius + '\&keyword=' + keyword + '\&key=' + googleMapKey;
 	console.log(url);
 
 	request(url , function (error, response, body) {
@@ -39,7 +38,8 @@ router.get('/', function(req, res) {
 				(function(j2) {
 					if (list[j2] !== undefined) {
 						var deferred = jQuery.Deferred();
-						t.get('search/tweets',{q: "\""+list[j2].name+"\"", count: 5, location: location.lat+","+location.lon+","+radius+"km", result_type: "recent"},function(err, tweets, response) {
+						console.log(secrets.twitterConsumerSecretKey);
+						twit.get('search/tweets',{q: "\""+list[j2].name+"\"", count: 5, location: location.lat+","+location.lon+","+radius+"km", result_type: "recent"},function(err, tweets, response) {
 							if (!err && tweets.statuses.length !== 0) {
 								var batchInput = tweets.statuses.map(function(tweet) {
 									return tweet.text;
@@ -57,7 +57,7 @@ router.get('/', function(req, res) {
 									deferred.resolve();
 								}).error(function(err) {
 									console.log(err);
-									deferred.reject();
+									deferred.resolve();
 								});
 							} else {
 								console.log(err);

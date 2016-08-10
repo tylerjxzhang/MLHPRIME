@@ -1,5 +1,5 @@
 (function(){
-	var app = angular.module('firefly',['ui.router', 'ngRoute', 'uiGmapgoogle-maps']);
+	var app = angular.module('firefly',['ui.router', 'ngRoute', 'uiGmapgoogle-maps', 'google.places']);
 
 	app.config(function ($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider) {
     $routeProvider
@@ -15,6 +15,46 @@
   });
 
   app.controller('IndexCtrl', function($scope, $routeParams, $http){
+    $scope.loading = true;
+
+    $scope.search = {
+      'useCurrentLocation' : true,
+      'location' : null,
+      'radius' : 5
+    };
+
+    var getCurrentLocation = function() {
+      navigator.geolocation.getCurrentPosition(
+      function(position) {
+        $scope.$apply(function() {
+          $scope.search.currentLocation = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          };
+          $scope.loading = false;
+        });
+        console.log('Found your current location', $scope.search.currentLocation);
+      },function(error) {
+        $scope.$apply(function() {
+          $scope.search.currentLocation = {
+            latitude: 43.70011,
+            longitude: -79.41630
+          };
+          $scope.loading = false;
+        });
+        console.log('Unable to get location, use toronto for fall back location');
+      },{
+        enableHighAccuracy: false
+      });
+    };
+    
+    getCurrentLocation();
+    
+    $scope.discover = function() {
+      if ($scope.search.useCurrentLocation) {
+
+      }
+    };
   });
 
   app.controller('MainCtrl', function($scope, $routeParams, $http, uiGmapGoogleMapApi){
@@ -26,8 +66,7 @@
     var marker_id = 0;
 
     // Marker styling
-    var styles = [
-    {
+    var styles = [{
       "featureType":"landscape",
       "stylers":[
       {
@@ -39,9 +78,7 @@
       {
         "lightness":-45
       }
-      ]
-    },
-    {
+      ]},{
       "featureType":"poi",
       "stylers":[
       {
@@ -53,9 +90,7 @@
       {
         "lightness":-51
       }
-      ]
-    },
-    {
+      ]},{
       "featureType":"road",
       "elementType":"labels.icon",
       "stylers":[
@@ -74,9 +109,7 @@
       {
         "lightness":-25
       }
-      ]
-    },
-    {
+      ]},{
       "featureType":"road.highway",
       "stylers":[
       {
@@ -88,9 +121,7 @@
       {
         "hue":"#ffff00"
       }
-      ]
-    },
-    {
+      ]},{
       "featureType":"water",
       "stylers":[
       {
@@ -102,9 +133,7 @@
       {
         "lightness":-73
       }
-      ]
-    },
-    {
+      ]},{
       "featureType":"poi"
     }];
 
@@ -113,6 +142,8 @@
       'keyword':$routeParams.category,
       'radius':$routeParams.radius
     };
+
+    $scope.category = $routeParams.category;
 
     // Map init setting
     $scope.map = {
@@ -124,6 +155,12 @@
         styles: styles
       },
       zoom: 13
+    };
+
+    getColor = function (value){
+      //value from 0 to 1
+      var hue=((1-value)*120).toString(10);
+      return ["hsl(",hue,",100%,50%)"].join("");
     };
 
     // Draw new circle
@@ -142,7 +179,7 @@
           opacity: 1
         },
         fill: {
-          color: '#FFFF66',
+          color: getColor(1 - data.score),
           opacity: 0.5
         }
       }
@@ -159,7 +196,8 @@
         'fill': {
           'color': '#FFFF66',
           'opacity': d.score
-        }
+        },
+        'score': d.score
       };
       drawMarker(info);
       // Hide loading screen

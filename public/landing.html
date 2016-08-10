@@ -1,24 +1,40 @@
 <div id="main">
+	<div class="loading-container" ng-show="loading">
+		<div class="loading"></div>
+		<div id="loading-text">Loading</div>
+	</div>
 	 <video loop muted autoplay id="video_bg" style="position:absolute; z-index:-1; top:0px; width:100%;">
        <source src="./landing.mp4" type="video/mp4">
 	</video>
 	<div class="frontpage">
 		<img src="/font.png" class="firefly-font">
 		<div id="search">
-
-			<input class="search" ng-model="category" ng-init="radius=''"></input>
-			<form>
-			<select ng-model="radius" ng-init="radius=5">
-				<option value="1">1km</option>
-				<option value="2">2km</option>
-				<option value="3">3km</option>
-				<option value="4">4km</option>
-				<option value="5" ng-selected="radius == 5" >5km</option>
-				<option value="10">10km</option>
-				<option value="20">20km</option>
-			</select>
+			<form novalidate>
+				<div class="line">
+					<input class="searchText search firstLine" type="text" ng-model="search.category" placeholder="What are you craving?" required></input>
+					<select class="firstLine" ng-model="search.radius" ng-init="radius=5">
+						<option value="1">1km</option>
+						<option value="2">2km</option>
+						<option value="3">3km</option>
+						<option value="4">4km</option>
+						<option value="5" ng-selected="radius == 5" >5km</option>
+						<option value="10">10km</option>
+						<option value="20">20km</option>
+					</select>	
+					<a ng-click="discover()"><button class="search-submit firstLine">Discover</button></a>
+				</div>
+				<span class="newLine"></span>
+				<div class="halfline">
+					<label>
+						<input class="secondLine" type="checkbox" ng-model="search.useCurrentLocation">
+						Use my current location
+					</label>
+				</div>
+				<span class="newLine"></span>
+				<div class="line">
+					<input class="search secondLine form-control" ng-hide="search.useCurrentLocation" ng-model="search.location" g-places-autocomplete placeholder="Select location"></input>
+				</div>
 			</form>
-			<a ng-href="/app/{{category}}/{{radius}}"><button class="search-submit">Discover</button></a>
 		</div>
 	</div>
 	<div class="content">
