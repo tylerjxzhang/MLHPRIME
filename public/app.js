@@ -7,20 +7,22 @@
       templateUrl: "landing.html",
       controller: "IndexCtrl"
     })
-    .when("/app/:category/:radius", {
+    .when("/app/:lon/:lat/:category/:radius", {
       templateUrl: "main.html",
       controller: "MainCtrl"
     });
     $locationProvider.html5Mode(true);
   });
 
-  app.controller('IndexCtrl', function($scope, $routeParams, $http){
+  app.controller('IndexCtrl', function($scope, $routeParams, $http, $location){
     $scope.loading = true;
 
     $scope.search = {
       'useCurrentLocation' : true,
       'location' : null,
-      'radius' : 5
+      'category' : null,
+      'radius' : 5,
+      'currentLocation' : null
     };
 
     var getCurrentLocation = function() {
@@ -47,12 +49,28 @@
         enableHighAccuracy: false
       });
     };
-    
-    getCurrentLocation();
-    
-    $scope.discover = function() {
-      if ($scope.search.useCurrentLocation) {
 
+    getCurrentLocation();
+
+    var getGeoCoord = function(loca) {
+      return $http({
+        method: 'GET',
+        url: '/api/locate?address='+loca
+      });
+    };
+
+    $scope.discover = function() {
+      if ($scope.search.category) {
+        if ($scope.search.useCurrentLocation && $scope.search.currentLocation) {
+          $location.path('/app/' + $scope.search.currentLocation.longitude + '/' + $scope.search.currentLocation.latitude + '/' + $scope.search.category + '/' + $scope.search.radius);
+        } else if (!$scope.search.useCurrentLocation && $scope.search.location) {
+          $http.get('/api/locate?address='+$scope.search.location.formatted_address)
+            .then(function successCallback (response) {
+            $location.path('/app/' + response.data.longitude + '/' + response.data.latitude + '/' + $scope.search.category + '/' + $scope.search.radius);
+          }, function errorCallback (response) {
+            console.log(response);
+          });
+        }
       }
     };
   });
@@ -60,10 +78,12 @@
   app.controller('MainCtrl', function($scope, $routeParams, $http, uiGmapGoogleMapApi){
     // Loading screen
     $scope.loading = true;
-    
+
     // Markers
     $scope.circles = [];
+    $scope.markers = [];
     var marker_id = 0;
+    var circle_id = 0;
 
     // Marker styling
     var styles = [{
@@ -140,7 +160,9 @@
     // Query string params
     $scope.query = {
       'keyword':$routeParams.category,
-      'radius':$routeParams.radius
+      'radius':$routeParams.radius,
+      'lon':$routeParams.lon,
+      'lat':$routeParams.lat
     };
 
     $scope.category = $routeParams.category;
@@ -148,8 +170,8 @@
     // Map init setting
     $scope.map = {
       center: {
-        latitude: 43.70011,
-        longitude: -79.41630
+        latitude: $scope.query.lat,
+        longitude: $scope.query.lon
       },
       options: {
         styles: styles
@@ -166,28 +188,43 @@
     // Draw new circle
     drawMarker = function(data) {
       $scope.circles.push(
-      {
-        id: ++marker_id,
-        center: {
-          latitude: data.lat,
-          longitude: data.lon
-        },
-        radius: data.rad,
-        stroke: {
-          color: '#000',
-          weight: 2,
-          opacity: 1
-        },
-        fill: {
-          color: getColor(1 - data.score),
-          opacity: 0.5
+        {
+          id: ++circle_id,
+          center: {
+            latitude: data.lat,
+            longitude: data.lon
+          },
+          radius: data.rad,
+          stroke: {
+            color: '#000',
+            weight: 2,
+            opacity: 1
+          },
+          fill: {
+            color: getColor(1 - data.score),
+            opacity: 0.5
+          }
         }
-      }
+      );
+      $scope.markers.push(
+        {
+          id: ++marker_id,
+          location:{
+            latitude: data.lat,
+            longitude: data.lon
+          },
+          tweets: data.tweets,
+          title: data.name,
+          clickable: true
+        }
       );
     };
 
     // Create new circle
     addMarker = function(d) {
+      if (!d.score) {
+        return
+      }
       info = {
         'name': d.name,
         'lat': d.geometry.location.lat,
@@ -197,6 +234,7 @@
           'color': '#FFFF66',
           'opacity': d.score
         },
+        'tweets': d.tweets,
         'score': d.score
       };
       drawMarker(info);
@@ -208,46 +246,24 @@
     displayMarkers = function() {
       $http({
         method: 'GET',
-        url: '/api?lat='+$scope.map.center.latitude+'\&lon='+$scope.map.center.longitude+'\&radius='+$scope.query.radius+'\&keyword='+$scope.query.keyword
+        url: '/api/discover?lat='+$scope.map.center.latitude+'\&lon='+$scope.map.center.longitude+'\&radius='+$scope.query.radius+'\&keyword='+$scope.query.keyword
       }).then(
       function successCallback(response) {
         console.log('API response', response);
-        response.data.forEach(addMarker);
+        if (response.data) {
+          response.data.forEach(addMarker);
+        } else {
+          $scope.loading = false;
+        }
       },function errorCallback(err) {
         console.log(err);
       });
     };
 
-    getPosition = function() {
-      navigator.geolocation.getCurrentPosition(
-      function(position) {
-        $scope.$apply(function() {
-          $scope.map.center = {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-          };
-        });
-        console.log('Found your current location', $scope.map.center);
-        displayMarkers();
-      },function(error) {
-        $scope.$apply(function() {
-          $scope.map.center = {
-            latitude: 43.70011,
-            longitude: -79.41630
-          };
-        });
-        console.log('Unable to get location,');
-        displayMarkers();
-      },{
-        enableHighAccuracy: false
-      });
-    };
-
     init = function() {
-      getPosition();
+      displayMarkers();
     };
 
     init();
-    
   });
 })();

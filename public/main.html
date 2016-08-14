@@ -16,12 +16,23 @@
 				<option value="20">20km</option>
 			</select>
 		</form>
-		<a ng-href="/app/{{category}}/{{radius}}/"><button class="search2-submit">Discover</button></a>
+		<a ng-href="/app/{{map.center.longitude}}/{{map.center.latitude}}/{{category}}/{{radius}}/"><button class="search2-submit">Discover</button></a>
 	</div>
 	<div class="block map">
 		<ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options">
 			<ui-gmap-circle ng-repeat="c in circles track by c.id" center="c.center" stroke="c.stroke" fill="c.fill" radius="c.radius" style="position:relative;z-index:-1">
 			</ui-gmap-circle>
+      <ui-gmap-markers models="markers" coords="'location'"  icon= '{url:"pin.png" }' click="'onClick'">
+        <ui-gmap-windows show="show">
+          <div ng-non-bindable>
+            <h1>{{title}}</h1>
+            <p>
+              {{tweets}}
+            </p>
+          </div>
+        </ui-gmap-windows>
+      </ui-gmap-markers>
 		</ui-gmap-google-map>
+
 	</div>
 </div>

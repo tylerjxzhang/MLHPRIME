@@ -1,13 +1,17 @@
-body { 
+body {
 	background-color:#000;
 	color:#e4e4e4;
 	margin:0px auto;
-	font-weight: normal; 
+	font-weight: normal;
 	font-family: Geneva, Tahoma, Verdana, sans-serif;
 }
 h1, h2 {
 	color:#222;
 	padding:12px 20px;
+}
+
+p {
+  color:#444;
 }
 span {
 	color:#ED1C24;
@@ -154,7 +158,7 @@ form {
 #main {
 	width:100%;
 	margin:auto;
-	
+
 }
 #main .row {
 	display:flex;
@@ -234,7 +238,7 @@ footer a:hover {
 	color:#fff;
 }
 .loading-overlay {
-	
+
 }
 /* loading */
 
