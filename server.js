@@ -3,7 +3,7 @@ var api = require('./api.js');
 var util = require('util');
 var app = express();
 
-var port = 8080;
+var port = 3000;
 
 app.use('/api', api);
 
