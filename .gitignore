@@ -7,5 +7,5 @@ public/components
 /server/config/local.env.js
 npm-debug.log
 coverage
-.secrets.js
+secrets.js
 

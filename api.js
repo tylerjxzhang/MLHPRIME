@@ -40,7 +40,7 @@ router.get('/discover', function(req, res) {
         list.forEach(function(item){
           (function (place) {
             var deferred = jQuery.Deferred();
-            twit.get('search/tweets',{q: "\""+place.name+"\"", count: 10, result_type: "recent"},function(err, body, response) {
+            twit.get('search/tweets',{q: "\""+place.name+"\"", count: 10, geocode: location.lat + ',' + location.lon + ',10mi' ,result_type: "recent"},function(err, body, response) {
               if (!err && body.statuses.length !== 0) {
                 var batchInput = body.statuses.map(function(tweet) {
                   return tweet.text;
