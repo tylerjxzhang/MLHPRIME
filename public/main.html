@@ -25,7 +25,12 @@
       <ui-gmap-markers models="markers" coords="'location'"  icon= '{url:"pin.png" }' click="'onClick'">
         <ui-gmap-windows show="show">
           <div ng-non-bindable>
-            <h1>{{title}}</h1>
+            <h1 class="popup">{{title}}</h1>
+            <div class="line">
+              <h2>Address: {{placeName}}</h2>
+              <h2>Google Rating: {{rating}}</h2>
+            </div>
+            <hr/>
             <p>
               {{tweets}}
             </p>

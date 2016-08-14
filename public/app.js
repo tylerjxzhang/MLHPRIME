@@ -215,6 +215,8 @@
           },
           tweets: data.tweets,
           title: data.name,
+          rating: data.rating,
+          placeName: data.place,
           clickable: true
         }
       );
@@ -235,7 +237,9 @@
           'opacity': d.score
         },
         'tweets': d.tweets,
-        'score': d.score
+        'score': d.score,
+        'rating': d.rating,
+        'place': d.vicinity
       };
       drawMarker(info);
       // Hide loading screen
