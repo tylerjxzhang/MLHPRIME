@@ -69,8 +69,9 @@ router.get('/discover', function(req, res) {
                     var average = sum / results.length;
                     place['tweets'] = batchInput.join('<br/>');
                     place['score'] = average;
+										console.log("the score is " + place['score']);
                   }
-
+									deferred.resolve();
                 });
               } else {
                 deferred.resolve();
@@ -117,7 +118,7 @@ router.get('/locate', function(req, res) {
 
 router.post('/sentiment', function(req, res) {
 	var results_parse = req.body.data.map(function(tweet) {
-		return sentiment(tweet).comparative;;
+		return sentiment(tweet).comparative;
 	})
 	console.log(req.body);
 	res.body = {
