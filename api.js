@@ -6,6 +6,8 @@ var Twitter = require("twitter");
 var jQuery = require('jquery-deferred');
 var secrets = require('./secrets');
 var sentiment = require('sentiment');
+var bodyparser = require('body-parser');
+
 
 var twit = new Twitter({
 	consumer_key: secrets.twitterConsumerKey,
@@ -15,6 +17,9 @@ var twit = new Twitter({
 });
 
 var googleMapKey = secrets.googleMapKey;
+
+
+
 
 router.get('/discover', function(req, res) {
 	// Get params
@@ -46,12 +51,11 @@ router.get('/discover', function(req, res) {
                 var batchInput = body.statuses.map(function(tweet) {
                   return tweet.text;
                 });
-                console.log(batchInput);
                 request({
-                  url: 'https://apiv2.indico.io/sentiment/batch',
+                  url: 'http://localhost:8000/api/sentiment',
                   method: 'POST',
-                  json: {
-                    api_key: secrets.indicoKey,
+									json: true,
+                  body: {
                     data: batchInput
                   }
                 }, function(error, response, body){
@@ -66,7 +70,7 @@ router.get('/discover', function(req, res) {
                     place['tweets'] = batchInput.join('<br/>');
                     place['score'] = average;
                   }
-                  deferred.resolve();
+
                 });
               } else {
                 deferred.resolve();
@@ -109,6 +113,17 @@ router.get('/locate', function(req, res) {
 			console.log(error);
 		}
 	});
+});
+
+router.post('/sentiment', function(req, res) {
+	var results_parse = req.body.data.map(function(tweet) {
+		return sentiment(tweet).comparative;;
+	})
+	console.log(req.body);
+	res.body = {
+		results: results_parse
+	}
+	res.json(res.body);
 });
 
 module.exports = router;

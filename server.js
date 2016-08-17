@@ -1,7 +1,12 @@
 var express = require('express');
+var bodyparser = require('body-parser');
 var api = require('./api.js');
 var util = require('util');
 var app = express();
+
+
+app.use(bodyparser.json());
+
 
 var port = 8000;
 
