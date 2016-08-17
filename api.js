@@ -5,6 +5,7 @@ var request = require('request');
 var Twitter = require("twitter");
 var jQuery = require('jquery-deferred');
 var secrets = require('./secrets');
+var sentiment = require('sentiment');
 
 var twit = new Twitter({
 	consumer_key: secrets.twitterConsumerKey,
